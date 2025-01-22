@@ -1,6 +1,43 @@
-body {
-    margin: 0;
-    padding: 0;
-    background: url('images/background.jpg') no-repeat center center fixed;
-    background-size: cover;
-}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Custom Background</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: black;
+      background-size: cover;
+      background-position: center;
+      height: 100vh;
+    }
+
+    #upload {
+      position: fixed;
+      top: 10px;
+      left: 10px;
+      z-index: 100;
+    }
+  </style>
+</head>
+<body>
+  <input type="file" id="upload" accept="image/*">
+
+  <script>
+    const upload = document.getElementById('upload');
+
+    upload.addEventListener('change', (event) => {
+      const file = event.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          document.body.style.backgroundImage = `url('${e.target.result}')`;
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+  </script>
+</body>
+</html>
